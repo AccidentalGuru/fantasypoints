@@ -15,29 +15,60 @@ def moving_average(a, n=3) :
     ret = np.append([np.nan] * (n/2), ret)
     return ret
 
-# pts = score.offense('Matt Ryan', year=2016)
-# print 'Matt Ryan', pts
+players = [
+    "Matt Ryan",
+    "LeSean McCoy",
+    "Adrian Peterson",
+    "DeAndre Hopkins",
+    "Michael Crabtree",
+    "Rob Gronkowski",
+    "Brandon Marshall",
+    "Donte Moncrief",
+    "Doug Martin",
+    "Kenny Brit",
+    "Duke Johnson Jr.",
+    "Jack Doyle",
+    "Eli Manning",
+    "Shane Vereen"
+]
+
+kickers = ["Dustin Hopkins", "Matt Bryant"]
+
+# pts = score.offense(players, year=2016)
+# print pts
 #
-# pts = score.kicker('Dustin Hopkins', year=2016)
+# pts = score.offense("Matt Ryan", year=2016)
+# print pts
+#
+# pts = score.kicker(kickers, year=2016)
 # print 'Dustin Hopkins', pts
 #
 # pts = score.defense('KC', year=2016)
-# print 'Cheifs', pts
+# print pts
 
+p1 = 'Matt Ryan'
+p2 = 'Julio Jones'
 pts1 = []
 pts2 = []
 for year in range(2009,2017):
     for week in range(1,17):
-        pts = score.offense('Matt Ryan', year=year, week=week, season_type='Regular')
-        pts1.append(pts)
-        pts = score.offense('LeSean McCoy', year=year, week=week, season_type='Regular')
-        pts2.append(pts)
+        pts = score.offense([p1, p2], year=year, week=week, season_type='Regular')
+        if p1 in pts:
+            pts1.append(pts[p1])
+        else:
+            pts1.append(0)
+        if p2 in pts:
+            pts2.append(pts[p2])
+        else:
+            pts2.append(0)
 
-player1, = plt.plot(pts1, 'r-', label='Matt Ryan', alpha=0.3)
-player2, = plt.plot(pts2, 'b-', label='LeSean McCoy', alpha=0.3)
-sma1, = plt.plot(moving_average(np.array([pts1]), 16), 'y-', label='Matt Ryan SMA')
-sma2, = plt.plot(moving_average(np.array([pts2]), 16), 'g-', label='LeSean McCoy SMA')
-plt.legend([player1, player2, sma1, sma2], ['Matt Ryan', 'LeSean McCoy', 'Matt Ryan SMA-16', 'LeSean McCoy SMA-16'])
+player1, = plt.plot(pts1, 'r-', label=p1, alpha=0.3)
+player2, = plt.plot(pts2, 'b-', label=p2, alpha=0.3)
+sma1_label = p1 + ' SMA-16'
+sma2_label = p2 + ' SMA-16'
+sma1, = plt.plot(moving_average(np.array([pts1]), 16), 'y-', label=sma1_label)
+sma2, = plt.plot(moving_average(np.array([pts2]), 16), 'g-', label=sma2_label)
+plt.legend([player1, player2, sma1, sma2], [p1, p2, sma1_label, sma2_label])
 plt.xticks([(year - 2009) * 16 for year in range(2009,2017)], [year for year in range(2009,2017)])
 plt.grid()
 plt.title('Fantasy Points For Regular Season Games (2009 - 2016)')
