@@ -33,7 +33,7 @@ def offense(player_name, team=None, pos=None, year=None, week=None, season_type=
 
     return player_scores
 
-def kicker(player_name, team=None, pos=None, year=None, week=None, season_type='Regular'):
+def kicker(player_name, team=None, pos=None, year=None, week=None, season_type=None):
     kicker_scores = {}
 
     # Extra points and missed FGs
@@ -59,7 +59,7 @@ def kicker(player_name, team=None, pos=None, year=None, week=None, season_type='
 
     return kicker_scores
 
-def defense(team, year=None, week=None, season_type='Regular'):
+def defense(team, year=None, week=None, season_type=None):
     defense_scores = {}
     teams = []
 
@@ -125,6 +125,45 @@ def defense(team, year=None, week=None, season_type='Regular'):
                 defense_scores[t] += score
 
     return defense_scores
+
+def offense_by_game(player_name, team=None, pos=None, year=None, week=None, season_type=None):
+    player_scores = {}
+    num_games = 0
+    original_week = week
+    season = ['Preseason', 'Regular', 'Postseason']
+    if season_type is not None:
+        if type(season_type) is list:
+            season = season_type
+        else:
+            season = [season_type]
+    if year is None:
+        year = [i for i in range(2009,2017)]
+    elif type(year) is not list:
+        year = [year]
+    for y in year:
+        for s in season:
+            if week is None:
+                if s == 'Regular':
+                    week = [i for i in range(1,18)]
+                elif s == 'Preseason' and y == 2009:
+                    week = [i for i in range(1,5)]
+                elif s == 'Preseason':
+                    week = [i for i in range(1,4)]
+                elif s == 'Postseason':
+                    week = [i for i in range(1,5)]
+            for w in week:
+                weekly_scores = offense(player_name, team, pos, y, w, s)
+                for key in weekly_scores:
+                    if key not in player_scores:
+                        player_scores[key] = [0] * num_games
+                for key in player_scores:
+                    if key in weekly_scores:
+                        player_scores[key].append(weekly_scores[key])
+                    else:
+                        player_scores[key].append(0)
+                num_games += 1
+            week = original_week
+    return player_scores
 
 def create_query(player_name=None, team=None, pos=None, year=None, week=None, season_type=None):
     db = nfldb.connect()
