@@ -179,11 +179,11 @@ def players(season_type=None, season_year=None, week=None, position=None, player
         pass_yards = _yards(pp, play_type='passing')
         pass_atts = _attempts(pp, play_type='passing')
         pass_ypa = _yardsPerAttempt(pass_yards, pass_atts)
-        receive_yards = _yards(pp, play_type='rushing')
-        receive_atts = _attempts(pp, play_type='rushing')
+        receive_yards = _yards(pp, play_type='receiving')
+        receive_atts = _attempts(pp, play_type='receiving')
         receive_ypa = _yardsPerAttempt(receive_yards, receive_atts)
-        rush_yards = _yards(pp, play_type='receiving')
-        rush_atts = _attempts(pp, play_type='receiving')
+        rush_yards = _yards(pp, play_type='rushing')
+        rush_atts = _attempts(pp, play_type='rushing')
         rush_ypa = _yardsPerAttempt(rush_yards, rush_atts)
         gp = games_played[player_id]
         row = Row(
