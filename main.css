@@ -1,0 +1,143 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Search bar */
+.dataTables_filter {
+  padding: 10px;
+  text-align: right;
+  width: calc(50% - 20px);
+  float: right;
+}
+
+/* Search bar label */
+.dataTables_filter label {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Positions fields */
+.toolbar fieldset {
+  padding: 10px;
+  text-align: left;
+  float: left;
+  width: calc(50% - 20px);
+  border: 0;
+  margin: 0;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+/* Positions label */
+.toolbar legend {
+  float: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+/* Positions checkboxes */
+.dataTables_filter input {
+  margin-left: 5px;
+}
+
+/* Make header width dynamic */
+.dataTables_scrollHeadInner, .dataTables_scrollHeadInner table {
+  width: 100% !important;
+}
+
+/* Hide real thead when using fixed headers */
+.dataTables_scrollBody thead {
+  visibility: hidden;
+}
+
+/* Table */
+table {
+  border-spacing: 0px;
+  width: 100%;
+}
+
+/* Header cells */
+th {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-align: right;
+  vertical-align: bottom;
+  box-sizing: border-box;
+}
+
+/* Group header cells */
+thead th.group-header {
+  text-align: center;
+  padding: 2px 5px;
+}
+
+/* Group header cell internal wrappers */
+thead th.group-header div {
+  border-bottom: 1px solid black;
+  height: 20px;
+}
+
+/* Bottom row table headers */
+thead tr:last-child th {
+  border-bottom: 2px solid black;
+  cursor: pointer;
+}
+
+/* Row */
+tr {
+  cursor: pointer;
+}
+
+/* Selected row */
+tr.selected {
+  font-weight: bold;
+  background-color: #80d6ff;
+}
+
+tr.selected td {
+  opacity: 0.7;
+}
+
+/* All cells */
+th, td {
+  padding: 5px 10px;
+  background-color: white;
+}
+
+/* Data cells */
+td {
+  font-size: 14px;
+  text-align: right;
+}
+
+/* Rank column */
+td:nth-child(1) {
+  font-weight: 700;
+}
+
+/* Player name column */
+td:nth-child(2), th:nth-child(2) {
+  text-align: left;
+}
+
+/* Team column */
+td:nth-child(3), th:nth-child(3) {
+  text-align: center;
+}
+
+/* Position column */
+td:nth-child(4), th:nth-child(4) {
+  text-align: center;
+}
+
+/* No data cell */
+.dataTables_empty {
+  text-align: center;
+  padding: 20px 0;
+}
